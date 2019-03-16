@@ -1,6 +1,6 @@
 <?php
 
-// chmod("dayside", 0777);
+chmod("dayside", 0777);
 
 require 'Request.php';
 require 'Router.php';
