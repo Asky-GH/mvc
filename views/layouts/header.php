@@ -15,7 +15,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <a class="nav-link" href="/">Main</a>
                 <a class="nav-link" href="/tasks">Tasks</a>
             </div>
