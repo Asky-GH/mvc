@@ -16,7 +16,7 @@ include 'layouts/header.php';
         <a class="btn btn-primary btn-lg" href="/tasks" role="button">Get started</a>
 
     <?php if (! isset($_SESSION['user'])) { ?>
-        <a class="btn btn-light btn-lg" href="/sign-in">Sign in</a>
+        <a class="btn btn-light btn-lg" href="index.php/sign-in">Sign in</a>
     <?php } ?>
     </div>
 </div>
