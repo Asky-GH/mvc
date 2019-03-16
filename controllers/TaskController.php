@@ -4,7 +4,6 @@ class TaskController
 {
     public static function show()
     {
-        session_start();
         $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'status_id';
         $_SESSION['sortBy'] = $sortBy;
         $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -34,13 +33,13 @@ class TaskController
     {
         $errors = [];
 
-        $errors = static::validateParameters($errors);
-        $errors = static::validateUsername($errors);
-        $errors = static::validateEmail($errors);
-        $errors = static::validateDescription($errors);
+        $errors = Validation::validateNewTaskParameters($errors);
+        $errors = Validation::validateUsername($errors);
+        $errors = Validation::validateEmail($errors);
+        $errors = Validation::validateDescription($errors);
         
         if (count($errors) > 0) {
-            static::returnError($errors);
+            require 'views/tasks/create.php';
         } else {
             $username = $_POST['username'];
             $email = $_POST['email'];
@@ -54,7 +53,7 @@ class TaskController
 
     public static function edit()
     {
-        static::auth();
+        Authentication::authorize();
 
         $id = $_GET['id'];
 
@@ -65,7 +64,7 @@ class TaskController
 
     public static function update()
     {
-        static::auth();
+        Authentication::authorize();
 
         $id = $_POST['id'];
         $description = $_POST['description'];
@@ -76,56 +75,9 @@ class TaskController
         header('Location: /tasks');
     }
 
-    protected static function auth()
-    {
-        session_start();
-        if (! isset($_SESSION['user'])) {
-            header('Location: /403');
-        }
-    }
-
     protected static function numberOfTasks()
     {
         return count(TaskDAO::findAll());
-    }
-
-    protected static function validateParameters($errors)
-    {
-        if (! isset($_POST['username']) || ! $_POST['email'] || ! $_POST['description']) {
-            array_push($errors, 'Please, fill all fields.');
-        }
-        return $errors;
-    }
-
-    protected static function validateUsername($errors)
-    {
-        if (mb_strlen($_POST['username']) < 3 || mb_strlen($_POST['username']) > 45) {
-            array_push($errors, 'Username length must be at least 3 and at most 45 characters long.');
-        }
-        return $errors;
-    }
-
-    protected static function validateEmail($errors)
-    {
-        if (mb_strlen($_POST['email']) < 5 || mb_strlen($_POST['email']) > 45) {
-            array_push($errors, 'Email length must be at least 5 and at most 45 characters long.');
-        }
-        return $errors;
-    }
-
-    protected static function validateDescription($errors)
-    {
-        if (mb_strlen($_POST['description']) < 10) {
-            array_push($errors, 'Description length must be at least 10 characters long.');
-        }
-        return $errors;
-    }
-
-    protected static function returnError($errors)
-    {
-        $error = $errors[0];
-
-        require 'views/tasks/create.php';
     }
 }
 

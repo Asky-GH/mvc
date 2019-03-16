@@ -3,6 +3,9 @@
 require 'Request.php';
 require 'Router.php';
 
+require 'utils/Authentication.php';
+require 'utils/Validation.php';
+
 require 'controllers/MainController.php';
 require 'controllers/SignInController.php';
 require 'controllers/TaskController.php';
@@ -28,5 +31,7 @@ Router::addPostRoute('/tasks/edit', 'TaskController@update');
 
 Router::addGetRoute('/403', 'ErrorController@forbidden');
 Router::addGetRoute('/404', 'ErrorController@notFound');
+
+session_start();
 
 Router::dispatch();

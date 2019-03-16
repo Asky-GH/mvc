@@ -11,23 +11,25 @@ include 'layouts/header.php';
             <label for="username">Username</label>
 
             <input type="text" name="username" class="form-control" id="username" 
-                    placeholder="Enter username">
+                    placeholder="Enter username" tabindex="1">
         </div>
         
         <div class="form-group">
             <label for="password">Password</label>
 
             <input type="password" name="password" class="form-control" id="password" 
-                    placeholder="Enter password">
+                    placeholder="Enter password" tabindex="2">
         </div>
 
     <?php if (isset($error)) { ?>
         <div class="text-danger">
-            <?= $error ?>
+            <p>
+                <?= $error ?>
+            </p>            
         </div>
     <?php } ?>
 
-        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button type="submit" class="btn btn-primary" tabindex="3">Sign In</button>
     </form>
 </div>
 

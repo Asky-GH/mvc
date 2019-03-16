@@ -11,30 +11,34 @@ include 'views/layouts/header.php';
             <label for="username">Username</label>
 
             <input type="text" name="username" class="form-control" id="username" 
-                    placeholder="Enter username">
+                    placeholder="Enter username" tabindex="1">
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
 
             <input type="text" name="email" class="form-control" id="email" 
-                    placeholder="Enter email">
+                    placeholder="Enter email" tabindex="2">
         </div>
 
         <div class="form-group">
             <label for="description">Description</label>
 
             <textarea name="description" class="form-control" id="description" 
-                        rows="3" placeholder="Enter description"></textarea>
+                        rows="3" placeholder="Enter description" tabindex="3"></textarea>
         </div>
 
-    <?php if (isset($error)) { ?>
+    <?php if (isset($errors)) { ?>
         <div class="text-danger">
-            <?= $error ?>
+            <ul>
+            <?php foreach ($errors as $error) { ?>
+                <li><?= $error ?></li>
+            <?php } ?>
+            </ul>
         </div>
     <?php } ?>
     
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary" tabindex="4">Create</button>
     </form>
 </div>
 

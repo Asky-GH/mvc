@@ -27,19 +27,19 @@ include 'views/layouts/header.php';
             <label for="description">Description</label>
 
             <textarea name="description" class="form-control" id="description" 
-                        rows="3"><?= $task->getDescription() ?></textarea>
+                        rows="3" tabindex="1"><?= $task->getDescription() ?></textarea>
         </div>
 
         <div class="form-check">
             <input type="checkbox" name="status" id="status" class="form-check-input" 
-                    <?php if ($task->getStatusId() === '2') { ?> checked <?php } ?> >
+                    <?php if ($task->getStatusId() === '2') { ?> checked <?php } ?>  tabindex="2">
 
             <label class="form-check-label" for="status">
                 Completed
             </label>
         </div>
 
-        <button type="submit" class="btn btn-primary">Edit</button>
+        <button type="submit" class="btn btn-primary" tabindex="3">Edit</button>
     </form>
 </div>
 
