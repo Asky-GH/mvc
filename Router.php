@@ -9,16 +9,12 @@ class Router
 
     public static function addGetRoute($action, $route)
     {
-        if (! array_key_exists($action, static::$routes['GET'])) {
-            static::$routes['GET'][$action] = $route;
-        }        
+        static::$routes['GET'][$action] = $route;     
     }
 
     public static function addPostRoute($action, $route)
     {
-        if (! array_key_exists($action, static::$routes['POST'])) {
-            static::$routes['POST'][$action] = $route;
-        }        
+        static::$routes['POST'][$action] = $route;     
     }
 
     public static function dispatch()
@@ -27,7 +23,7 @@ class Router
         $method = Request::getMethod();
 
         if (! array_key_exists($action, static::$routes[$method])) {
-            require 'views/404.php';
+            header('Location: /404');
         } else {
             $route = static::$routes[$method][$action];
             list($controller, $method) = explode('@', $route);

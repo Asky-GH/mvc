@@ -4,10 +4,7 @@ include 'layouts/header.php';
 ?>
 
 <div>
-    <h1>
-        The page you are looking for might have been removed, 
-        had its name changed or is temporarily unavailable.
-    </h1>
+    <h1>Not found - resource unavailable.</h1>
 </div>
 
 <?php

@@ -6,7 +6,7 @@ class Task
     protected $username;
     protected $email;
     protected $description;
-    protected $status;
+    protected $status_id;
 
     public function getId()
     {
@@ -28,9 +28,9 @@ class Task
         return $this->description;
     }
 
-    public function getStatus()
+    public function getStatusId()
     {
-        return $this->status;
+        return $this->status_id;
     }
 }
 

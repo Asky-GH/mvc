@@ -3,17 +3,38 @@ $title = 'Create Task Page';
 include 'views/layouts/header.php';
 ?>
 
-<div>
+<div class="container">
     <h1>New task</h1>
 
     <form action="/tasks" method="post">
-        <input type="text" name="username" placeholder="Username">
+        <div class="form-group">
+            <label for="username">Username</label>
 
-        <input type="text" name="email" placeholder="Email">
+            <input type="text" name="username" class="form-control" id="username" 
+                    placeholder="Enter username">
+        </div>
 
-        <textarea name="description" cols="30" rows="10" placeholder="Description"></textarea>
+        <div class="form-group">
+            <label for="email">Email</label>
 
-        <input type="submit" value="Create">
+            <input type="text" name="email" class="form-control" id="email" 
+                    placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+
+            <textarea name="description" class="form-control" id="description" 
+                        rows="3" placeholder="Enter description"></textarea>
+        </div>
+
+    <?php if (isset($error)) { ?>
+        <div class="text-danger">
+            <?= $error ?>
+        </div>
+    <?php } ?>
+    
+        <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>
 

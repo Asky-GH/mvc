@@ -3,25 +3,43 @@ $title = 'Edit Task Page';
 include 'views/layouts/header.php';
 ?>
 
-<div>
+<div class="container">
     <h1>Edit task</h1>
 
     <form action="/tasks/edit" method="post">
         <input type="hidden" name="id" value="<?= $task->getId() ?>">
 
-        <input type="text" name="username" value="<?= $task->getUsername() ?>" disabled>
+        <div class="form-group">
+            <label for="username">Username</label>
 
-        <input type="text" name="email" value="<?= $task->getEmail() ?>" disabled>
+            <input type="text" name="username" class="form-control" id="username" 
+                    value="<?= $task->getUsername() ?>" readonly>
+        </div>
 
-        <textarea name="description" cols="30" rows="10"><?= $task->getDescription() ?></textarea>
+        <div class="form-group">
+            <label for="email">Email</label>
 
-        <label for="status">
-            Completed
-            <input type="checkbox" name="status" id="status" 
-                    <?php if($task->getStatus()) { ?> checked <?php } ?> >
-        </label>
+            <input type="text" name="email" class="form-control" id="email" 
+                value="<?= $task->getEmail() ?>" readonly>
+        </div>
 
-        <input type="submit" value="Edit">
+        <div class="form-group">
+            <label for="description">Description</label>
+
+            <textarea name="description" class="form-control" id="description" 
+                        rows="3"><?= $task->getDescription() ?></textarea>
+        </div>
+
+        <div class="form-check">
+            <input type="checkbox" name="status" id="status" class="form-check-input" 
+                    <?php if ($task->getStatusId() === '2') { ?> checked <?php } ?> >
+
+            <label class="form-check-label" for="status">
+                Completed
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Edit</button>
     </form>
 </div>
 

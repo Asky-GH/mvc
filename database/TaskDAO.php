@@ -2,11 +2,17 @@
 
 class TaskDAO
 {
-    public static function findAll()
+    public static function find($sortBy, $offset, $limit)
     {
         $pdo = Connection::connect();
 
-        return $pdo->query('select * from tasks', PDO::FETCH_CLASS, 'Task');
+        $statement = $pdo->prepare("select * from tasks order by {$sortBy} 
+                                limit :offset, :limit");
+        $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'Task');
     }
 
     public static function create($username, $email, $description)
@@ -44,6 +50,15 @@ class TaskDAO
             ':description' => $description,
             ':status_id' => $statusId
         ]);
+    }
+
+    public static function findAll()
+    {
+        $pdo = Connection::connect();
+
+        $statement = $pdo->prepare('select * from tasks');
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'Task');
     }
 }
 

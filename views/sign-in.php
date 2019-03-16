@@ -3,19 +3,31 @@ $title = 'Sign In Page';
 include 'layouts/header.php';
 ?>
 
-<div>
-    <h1>Please sign in</h1>
+<div class="container">
+    <h1>Sign in</h1>
 
     <form action="/sign-in" method="post">
-        <input type="text" name="username" placeholder="Username">
+        <div class="form-group">
+            <label for="username">Username</label>
 
-        <input type="password" name="password" placeholder="Password">
+            <input type="text" name="username" class="form-control" id="username" 
+                    placeholder="Enter username">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+
+            <input type="password" name="password" class="form-control" id="password" 
+                    placeholder="Enter password">
+        </div>
 
     <?php if (isset($error)) { ?>
-        <p><?= $error ?></p>
+        <div class="text-danger">
+            <?= $error ?>
+        </div>
     <?php } ?>
 
-        <input type="submit" value="Sign In">
+        <button type="submit" class="btn btn-primary">Sign In</button>
     </form>
 </div>
 
