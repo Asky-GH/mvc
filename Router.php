@@ -1,7 +1,5 @@
 <?php
 
-require 'Request.php';
-
 class Router
 {
     protected static $routes = [

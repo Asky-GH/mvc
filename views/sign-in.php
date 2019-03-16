@@ -17,10 +17,6 @@ include 'layouts/header.php';
 
         <input type="submit" value="Sign In">
     </form>
-
-    <p>
-        Don't have an account? Please <a href="/sign-up">sign up</a>
-    </p>
 </div>
 
 <?php

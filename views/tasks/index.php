@@ -1,12 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tasks page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    
-</body>
-</html>
+<?php
+$title = 'Tasks Page';
+include 'views/layouts/header.php';
+session_start();
+?>
+
+<div>
+    <h1>Tasks</h1>
+
+    <ul>
+    <?php foreach ($tasks as $task) { ?>
+        <li><?= $task->getDescription() ?></li>
+        <?php if (isset($_SESSION['user'])) { ?>
+            <p>
+                <a href="/tasks/edit?id=<?= $task->getId() ?>">Edit task</a>
+            </p>
+        <?php } ?>
+    <?php } ?>
+    </ul>
+
+    <p>
+        <a href="/tasks/create">Create new task</a>
+    </p>
+</div>
+
+<?php
+include 'views/layouts/footer.php';
+?>

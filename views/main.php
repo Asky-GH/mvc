@@ -9,10 +9,6 @@ include 'layouts/header.php';
     <p>
         <a href="/sign-in">Sign in</a>
     </p>
-
-    <p>
-        <a href="/sign-up">Sing up</a>
-    </p>
 </div>
 
 <?php

@@ -1,8 +1,5 @@
 <?php
 
-require 'QueryBuilder.php';
-require 'Connection.php';
-
 class SignInController
 {
     public static function index()
@@ -12,12 +9,21 @@ class SignInController
 
     public static function signIn()
     {
-        $user = QueryBuilder::find(Connection::connect(), 'users', 'User', $_POST['username']);
-        if (! $user || ($user->getPassword() !== $_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        
+        // TODO validate parameters
+
+        $user = UserDAO::findByUsername($username);
+
+        if (! $user || ! password_verify($password, $user->getPassword())) {
             $error = 'Invalid username or password.';
 
             require 'views/sign-in.php';
         } else {
+            session_start();
+            $_SESSION['user'] = $user;
+
             header('Location: /tasks');
         }
     }
