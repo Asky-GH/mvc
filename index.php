@@ -22,7 +22,7 @@ require 'models/Task.php';
 
 Router::addGetRoute('/', 'MainController@index');
 
-Router::addGetRoute('/sign-in', 'SignInController@index');
+Router::addGetRoute('index.php/sign-in', 'SignInController@index');
 Router::addPostRoute('/sign-in', 'SignInController@signIn');
 
 Router::addGetRoute('/tasks', 'TaskController@show');
