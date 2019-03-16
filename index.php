@@ -22,7 +22,7 @@ require 'models/Task.php';
 
 Router::addGetRoute('/', 'MainController@index');
 
-Router::addGetRoute('pure-brook-55369.herokuapp.com/sign-in', 'SignInController@index');
+Router::addGetRoute('/pure-brook-55369.herokuapp.com/sign-in', 'SignInController@index');
 Router::addPostRoute('/sign-in', 'SignInController@signIn');
 
 Router::addGetRoute('/tasks', 'TaskController@show');
