@@ -14,10 +14,6 @@ include 'layouts/header.php';
         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
 
         <a class="btn btn-primary btn-lg" href="/tasks" role="button">Get started</a>
-
-    <?php if (! isset($_SESSION['user'])) { ?>
-        <a class="btn btn-light btn-lg" href="/sign-in">Sign in</a>
-    <?php } ?>
     </div>
 </div>
 

@@ -2,11 +2,13 @@
 
 class Validation
 {
-    public static function validateSignInParameters()
+    public static function validateSignInParameters($errors)
     {
         if (! isset($_POST['username']) || ! $_POST['password']) {
-            return 'Invalid username or password.';
+            array_push($errors, 'Invalid username or password.');
         }
+
+        return $errors;
     }
 
     public static function validateNewTaskParameters($errors)
