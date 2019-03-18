@@ -26,6 +26,9 @@ class TaskController
                 header('Location: /400');
             }
         }
+
+        var_dump($tasks);
+        die();
         
         require 'views/tasks/show.php';
     }
