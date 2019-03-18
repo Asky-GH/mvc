@@ -18,17 +18,14 @@ class TaskController
         $limit = 3;
         $offset = ($currentPage - 1) * $limit;
         $numberOfPages = ceil($this->numberOfTasks() / $limit);
-        
+
         try {
             $tasks = TaskDAO::find($sortBy, $offset, $limit);
         } catch (PDOException $e) {
-            if (strpos($e->getMessage(), 'Column not found')) {
+            if (strpos($e->getMessage(), 'Undefined column')) {
                 header('Location: /400');
             }
         }
-
-        // var_dump($tasks);
-        // die();
         
         require 'views/tasks/show.php';
     }
