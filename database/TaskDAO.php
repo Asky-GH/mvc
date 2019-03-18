@@ -4,6 +4,7 @@ namespace Database;
 
 use Database\Connection;
 use PDO;
+use Exception;
 
 class TaskDAO
 {
@@ -15,7 +16,12 @@ class TaskDAO
                                 limit :offset, :limit");
         $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
         $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $statement->execute();
+        try {            
+            $statement->execute();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
 
         return $statement->fetchAll(PDO::FETCH_CLASS, 'Models\\Task');
     }
