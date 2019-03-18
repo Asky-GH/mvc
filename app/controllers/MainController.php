@@ -14,9 +14,9 @@ class MainController
         require 'views/about.php';
     }
 
-    public function dayside()
-    {
-        require 'dayside/index.php';
-    }
+    // public function dayside()
+    // {
+    //     require 'dayside/index.php';
+    // }
 }
 
