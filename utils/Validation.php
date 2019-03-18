@@ -26,7 +26,7 @@ class Validation
     {
         $username = $_POST['username'];
 
-        if (mb_strlen(trim($username)) < 3 || mb_strlen(trim($username)) > 45) {
+        if (strlen(trim($username)) < 3 || strlen(trim($username)) > 45) {
             array_push($errors, 'Username length must be at least 3 and at most 45 characters long.');
         }
 
@@ -37,7 +37,7 @@ class Validation
     {
         $email = $_POST['email'];
 
-        if (mb_strlen(trim($email)) < 5 || mb_strlen(trim($email)) > 45) {
+        if (strlen(trim($email)) < 5 || strlen(trim($email)) > 45) {
             array_push($errors, 'Email length must be at least 5 and at most 45 characters long.');
         } elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             array_push($errors, 'Invalid email address.');
@@ -48,7 +48,7 @@ class Validation
 
     public static function validateDescription($errors)
     {
-        if (mb_strlen(trim($_POST['description'])) < 10) {
+        if (strlen(trim($_POST['description'])) < 10) {
             array_push($errors, 'Description length must be at least 10 characters long.');
         }
 
