@@ -37,7 +37,7 @@ include 'views/layouts/header.php';
 
                     <div class="form-check">
                         <input type="checkbox" name="status" id="status" class="form-check-input" 
-                                <?php if ($task->getStatusId() === '2') { ?> checked <?php } ?>  tabindex="2">
+                                <?php if ($task->getStatusId() == 2) { ?> checked <?php } ?>  tabindex="2">
 
                         <label class="form-check-label" for="status">
                             Completed
