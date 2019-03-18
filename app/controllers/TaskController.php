@@ -41,10 +41,10 @@ class TaskController
 
         $errors = [];
 
-        $errors = Validation::validateNewTaskParameters($errors);
-        $errors = Validation::validateUsername($errors);
-        $errors = Validation::validateEmail($errors);
-        $errors = Validation::validateDescription($errors);
+        // $errors = Validation::validateNewTaskParameters($errors);
+        // $errors = Validation::validateUsername($errors);
+        // $errors = Validation::validateEmail($errors);
+        // $errors = Validation::validateDescription($errors);
         
         if (count($errors) > 0) {
             require 'views/tasks/create.php';
