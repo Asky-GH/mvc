@@ -13,14 +13,21 @@ class Connection
 
         $db = parse_url(getenv("DATABASE_URL"));
 
+        // return new PDO("pgsql:" . sprintf(
+        //     "host=%s;port=%s;user=%s;password=%s;dbname=%s",
+        //     $db["host"],
+        //     $db["port"],
+        //     $db["user"],
+        //     $db["pass"],
+        //     ltrim($db["path"], "/")
+        // ));
+
         return new PDO("pgsql:" . sprintf(
-            "host=%s;port=%s;user=%s;password=%s;dbname=%s",
+            "host=%s;port=%s;dbname=%s",
             $db["host"],
             $db["port"],
-            $db["user"],
-            $db["pass"],
             ltrim($db["path"], "/")
-        ));
+        ), $db['user'], $db['pass'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     }
 }
 
