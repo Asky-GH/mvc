@@ -8,6 +8,7 @@ Router::addGetRoute('/404', 'ErrorController@notFound');
 
 Router::addGetRoute('/', 'MainController@index');
 Router::addGetRoute('/about', 'MainController@about');
+Router::addGetRoute('/dayside', 'MainController@dayside');
 
 Router::addGetRoute('/sign-in', 'AuthController@index');
 Router::addPostRoute('/sign-in', 'AuthController@signIn');
