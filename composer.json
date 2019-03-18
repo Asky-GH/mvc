@@ -1,0 +1,17 @@
+{
+    "name": "askhat/mvc",
+    "description": "Tasks application. MVC implementation on vanilla PHP.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Askhat Abishev",
+            "email": "asky.gm@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "classmap": [
+            "./"
+        ]
+    }
+}

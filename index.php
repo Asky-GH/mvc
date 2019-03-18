@@ -1,7 +1,9 @@
 <?php
 
-require 'imports.php';
+require 'vendor/autoload.php';
 require 'routes.php';
+
+use Core\Router;
 
 session_start();
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace Utils;
+
 class Authentication
 {
     public static function authorize()

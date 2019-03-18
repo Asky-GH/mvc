@@ -1,5 +1,7 @@
 <?php
 
+use Core\Router;
+
 Router::addGetRoute('/400', 'ErrorController@badRequest');
 Router::addGetRoute('/403', 'ErrorController@forbidden');
 Router::addGetRoute('/404', 'ErrorController@notFound');

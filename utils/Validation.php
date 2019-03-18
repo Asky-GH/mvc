@@ -1,5 +1,7 @@
 <?php
 
+namespace Utils;
+
 class Validation
 {
     public static function validateSignInParameters($errors)

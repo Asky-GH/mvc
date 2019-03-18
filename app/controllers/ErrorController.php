@@ -1,18 +1,20 @@
 <?php
 
+namespace Controllers;
+
 class ErrorController
 {
-    public static function forbidden()
+    public function forbidden()
     {
         require 'views/errors/403.php';
     }
 
-    public static function notFound()
+    public function notFound()
     {
         require 'views/errors/404.php';
     }
 
-    public static function badRequest()
+    public function badRequest()
     {
         require 'views/errors/400.php';
     }

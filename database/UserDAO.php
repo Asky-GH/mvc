@@ -1,5 +1,10 @@
 <?php
 
+namespace Database;
+
+use Database\Connection;
+use PDO;
+
 class UserDAO
 {
     public static function findByUsername($username)
@@ -8,7 +13,7 @@ class UserDAO
 
         $statement = $pdo->prepare('select * from users where username = :username');
         $statement->execute([':username' => $username]);
-        $statement->setFetchMode(PDO::FETCH_CLASS, 'User');
+        $statement->setFetchMode(PDO::FETCH_CLASS, 'Models\\User');
         
         return $statement->fetch();
     }

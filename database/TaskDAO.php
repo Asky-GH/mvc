@@ -1,5 +1,10 @@
 <?php
 
+namespace Database;
+
+use Database\Connection;
+use PDO;
+
 class TaskDAO
 {
     public static function find($sortBy, $offset, $limit)
@@ -12,7 +17,7 @@ class TaskDAO
         $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_CLASS, 'Task');
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'Models\\Task');
     }
 
     public static function create($username, $email, $description)
@@ -34,7 +39,7 @@ class TaskDAO
         
         $statement = $pdo->prepare('select * from tasks where id = :id');
         $statement->execute([':id' => $id]);
-        $statement->setFetchMode(PDO::FETCH_CLASS, 'Task');
+        $statement->setFetchMode(PDO::FETCH_CLASS, 'Models\\Task');
         
         return $statement->fetch();
     }
@@ -58,7 +63,7 @@ class TaskDAO
 
         $statement = $pdo->prepare('select * from tasks');
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_CLASS, 'Task');
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'Models\\Task');
     }
 }
 

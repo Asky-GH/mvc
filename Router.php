@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use Utils\Request;
+
 class Router
 {
     protected static $routes = [
@@ -27,7 +31,9 @@ class Router
         } else {
             $route = static::$routes[$method][$action];
             list($controller, $method) = explode('@', $route);
-            $controller::$method();
+            $controller = "Controllers\\{$controller}";
+            $controller = new $controller;
+            $controller->$method();
         }
     }
 }

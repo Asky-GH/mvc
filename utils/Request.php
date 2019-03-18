@@ -1,5 +1,7 @@
 <?php
 
+namespace Utils;
+
 class Request
 {
     public static function getAction()

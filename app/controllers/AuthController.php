@@ -1,13 +1,18 @@
 <?php
 
+namespace Controllers;
+
+use Utils\{Authentication, Validation};
+use Database\UserDAO;
+
 class AuthController
 {
-    public static function index()
+    public function index()
     {
         require 'views/sign-in.php';
     }
 
-    public static function signIn()
+    public function signIn()
     {
         Authentication::sanitize();
 
@@ -35,7 +40,7 @@ class AuthController
         }
     }
 
-    public static function signOut()
+    public function signOut()
     {
         Authentication::sanitize();
 

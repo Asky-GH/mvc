@@ -1,8 +1,14 @@
 <?php
 
+namespace Controllers;
+
+use Utils\{Authentication, Validation};
+use Database\TaskDAO;
+use PDOException;
+
 class TaskController
 {
-    public static function show()
+    public function show()
     {
         $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'status_id';
         $_SESSION['sortBy'] = $sortBy;
@@ -11,7 +17,7 @@ class TaskController
 
         $limit = 3;
         $offset = ($currentPage - 1) * $limit;
-        $numberOfPages = ceil(static::numberOfTasks() / $limit);
+        $numberOfPages = ceil($this->numberOfTasks() / $limit);
 
         try {
             $tasks = TaskDAO::find($sortBy, $offset, $limit);
@@ -24,12 +30,12 @@ class TaskController
         require 'views/tasks/show.php';
     }
 
-    public static function create()
+    public function create()
     {
         require 'views/tasks/create.php';
     }
 
-    public static function store()
+    public function store()
     {
         Authentication::sanitize();
 
@@ -53,7 +59,7 @@ class TaskController
         }
     }
 
-    public static function edit()
+    public function edit()
     {
         Authentication::authorize();
 
@@ -64,7 +70,7 @@ class TaskController
         require 'views/tasks/edit.php';
     }
 
-    public static function update()
+    public function update()
     {
         Authentication::sanitize();
         Authentication::authorize();
@@ -78,7 +84,7 @@ class TaskController
         header('Location: /tasks');
     }
 
-    protected static function numberOfTasks()
+    protected function numberOfTasks()
     {
         return count(TaskDAO::findAll());
     }
