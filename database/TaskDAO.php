@@ -69,9 +69,7 @@ class TaskDAO
 
         $statement = $pdo->prepare('select * from tasks');
         $statement->execute();
-        $tasks =  $statement->fetchAll(PDO::FETCH_CLASS, 'Models\\Task');
-        $statement->closeCursor();
-        return $tasks;
+        return $statement->fetchAll(PDO::FETCH_CLASS, 'Models\\Task');
     }
 }
 
