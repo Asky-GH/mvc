@@ -21,13 +21,13 @@ class TaskController
 
         try {
             $tasks = TaskDAO::find($sortBy, $offset, $limit);
+        
+            require 'views/tasks/show.php';
         } catch (PDOException $e) {
             if (strpos($e->getMessage(), 'Undefined column')) {
                 header('Location: /400');
             }
         }
-        
-        require 'views/tasks/show.php';
     }
 
     public function create()
@@ -37,51 +37,58 @@ class TaskController
 
     public function store()
     {
-        Authentication::sanitize();
-
-        $errors = [];
-
-        $errors = Validation::validateNewTaskParameters($errors);
-        $errors = Validation::validateUsername($errors);
-        $errors = Validation::validateEmail($errors);
-        $errors = Validation::validateDescription($errors);
-        
-        if (count($errors) > 0) {
-            require 'views/tasks/create.php';
+        if (! Authentication::sanitized()) {
+            header('Location: /400');
         } else {
-            $username = $_POST['username'];
-            $email = $_POST['email'];
-            $description = $_POST['description'];
+            $errors = [];
 
-            TaskDAO::create($username, $email, $description);
+            $errors = Validation::validateNewTaskParameters($errors);
+            $errors = Validation::validateUsername($errors);
+            $errors = Validation::validateEmail($errors);
+            $errors = Validation::validateDescription($errors);
+            
+            if (count($errors) > 0) {
+                require 'views/tasks/create.php';
+            } else {
+                $username = $_POST['username'];
+                $email = $_POST['email'];
+                $description = $_POST['description'];
 
-            header('Location: /tasks');
+                TaskDAO::create($username, $email, $description);
+
+                header('Location: /tasks');
+            }
         }
     }
 
     public function edit()
     {
-        Authentication::authorize();
+        if (! Authentication::authorized()) {
+            header('Location: /403');
+        } else {
+            $id = $_GET['id'];
 
-        $id = $_GET['id'];
+            $task = TaskDAO::findById($id);
 
-        $task = TaskDAO::findById($id);
-
-        require 'views/tasks/edit.php';
+            require 'views/tasks/edit.php';
+        }
     }
 
     public function update()
     {
-        Authentication::sanitize();
-        Authentication::authorize();
+        if (! Authentication::sanitized()) {
+            header('Location: /400');
+        } elseif (! Authentication::authorized()) {
+            header('Location: /403');
+        } else {
+            $id = $_POST['id'];
+            $description = $_POST['description'];
+            $status = $_POST['status'] ? 2 : 1;
 
-        $id = $_POST['id'];
-        $description = $_POST['description'];
-        $status = $_POST['status'] ? 2 : 1;
+            TaskDAO::update($id, $description, $status);
 
-        TaskDAO::update($id, $description, $status);
-
-        header('Location: /tasks');
+            header('Location: /tasks');
+        }
     }
 
     protected function numberOfTasks()

@@ -4,20 +4,16 @@ namespace Utils;
 
 class Authentication
 {
-    public static function authorize()
+    public static function authorized()
     {
-        if (! isset($_SESSION['user'])) {
-            header('Location: /403');
-        }
+        return isset($_SESSION['user']);
     }
 
-    public static function sanitize()
+    public static function sanitized()
     {
         $csrfToken = isset($_POST['csrfToken']) ? $_POST['csrfToken'] : 'BAD REQUEST!';
         
-        if (! $csrfToken === $_SESSION['csrf']) {
-            header('Location: /404');
-        }
+        return $csrfToken === $_SESSION['csrf'];
     }
 }
 

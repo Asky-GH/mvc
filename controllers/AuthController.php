@@ -14,39 +14,43 @@ class AuthController
 
     public function signIn()
     {
-        Authentication::sanitize();
-
-        $errors = [];
-
-        $errors = Validation::validateSignInParameters($errors);
-
-        if (count($errors) > 0) {
-            require 'views/sign-in.php';
+        if (! Authentication::sanitized()) {
+            header('Location: /400');
         } else {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+            $errors = [];
 
-            $user = UserDAO::findByUsername($username);
+            $errors = Validation::validateSignInParameters($errors);
 
-            if (! $user || ! password_verify($password, $user->getPassword())) {
-                array_push($errors, 'Invalid username or password.');
-
+            if (count($errors) > 0) {
                 require 'views/sign-in.php';
-            } else {                
-                $_SESSION['user'] = $user;
+            } else {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
 
-                header('Location: /tasks');
+                $user = UserDAO::findByUsername($username);
+
+                if (! $user || ! password_verify($password, $user->getPassword())) {
+                    array_push($errors, 'Invalid username or password.');
+
+                    require 'views/sign-in.php';
+                } else {                
+                    $_SESSION['user'] = $user;
+
+                    header('Location: /tasks');
+                }
             }
         }
     }
 
     public function signOut()
     {
-        Authentication::sanitize();
+        if (! Authentication::sanitized()) {
+            header('Location: /400');
+        } else {
+            unset($_SESSION['user']);
 
-        unset($_SESSION['user']);
-
-        header('Location: /');
+            header('Location: /');
+        }
     }
 }
 
