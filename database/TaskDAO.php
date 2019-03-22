@@ -11,7 +11,7 @@ class TaskDAO
     {
         $pdo = Connection::connect();
         
-        $statement = $pdo->prepare("select * from tasks order by {$sortBy} 
+        $statement = $pdo->prepare("select * from tasks order by {$sortBy}, id 
                                 limit :limit offset :offset");
         $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
         $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
