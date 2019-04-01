@@ -1,5 +1,7 @@
 <?php
 
+chmod('dayside', 0777);
+
 require 'vendor/autoload.php';
 require 'routes.php';
 
