@@ -4,14 +4,14 @@ namespace Controllers;
 
 use Utils\{Authentication, Validation};
 use Database\TaskDAO;
-use PDOException;
 
 class TaskController
 {
     public function show()
     {
         $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'status_id';
-        if ($sortBy != 'username' || $sortBy != 'email' || $sortBy != 'status_id') {
+        $tasksTableColumns = array('username', 'email', 'status_id');
+        if (!in_array($sortBy, $tasksTableColumns)) {
             $sortBy = 'status_id';
         }
         $_SESSION['sortBy'] = $sortBy;
