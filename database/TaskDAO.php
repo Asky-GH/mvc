@@ -57,13 +57,14 @@ class TaskDAO
         ]);
     }
 
-    public static function findAll()
+    public static function count()
     {
         $pdo = Connection::connect();
 
-        $statement = $pdo->prepare('select * from tasks');
+        $statement = $pdo->prepare('select count(id) as num from tasks');
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_CLASS, 'Models\\Task');
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result['num'];
     }
 }
 

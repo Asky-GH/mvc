@@ -20,7 +20,7 @@ class TaskController
 
         $limit = 3;
         $offset = ($currentPage - 1) * $limit;
-        $numberOfPages = ceil($this->numberOfTasks() / $limit);
+        $numberOfPages = ceil(TaskDAO::count() / $limit);
 
         $tasks = TaskDAO::find($sortBy, $offset, $limit);
         
@@ -86,11 +86,6 @@ class TaskController
 
             header('Location: /tasks');
         }
-    }
-
-    protected function numberOfTasks()
-    {
-        return count(TaskDAO::findAll());
     }
 }
 
