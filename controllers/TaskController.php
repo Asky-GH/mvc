@@ -11,6 +11,9 @@ class TaskController
     public function show()
     {
         $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'status_id';
+        if ($sortBy != 'username' || $sortBy != 'email' || $sortBy != 'status_id') {
+            $sortBy = 'status_id';
+        }
         $_SESSION['sortBy'] = $sortBy;
         $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
         $_SESSION['page'] = $currentPage;
@@ -19,15 +22,9 @@ class TaskController
         $offset = ($currentPage - 1) * $limit;
         $numberOfPages = ceil($this->numberOfTasks() / $limit);
 
-        try {
-            $tasks = TaskDAO::find($sortBy, $offset, $limit);
+        $tasks = TaskDAO::find($sortBy, $offset, $limit);
         
-            require 'views/tasks/show.php';
-        } catch (PDOException $e) {
-            if (strpos($e->getMessage(), 'Undefined column')) {
-                header('Location: /400');
-            }
-        }
+        require 'views/tasks/show.php';
     }
 
     public function create()
